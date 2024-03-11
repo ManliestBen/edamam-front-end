@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { NavLink } from "react-router-dom"
 import * as recipeService from '../../services/recipeService'
 import styles from './RecipeSearch.module.css'
 
@@ -35,10 +36,13 @@ const RecipeSearch = () => {
         results.length ?
         <div className={styles.resultContainer}>
           {results.map(recipe =>
-            <div key={recipe.recipe.uri} className={styles.recipeCard}>
-              <img src={recipe.recipe.image} alt="" />
-              <h3>{recipe.recipe.label}</h3>
-            </div>  
+            <NavLink to={`/recipes/${recipe.recipe.uri.replace(`http://www.edamam.com/ontologies/edamam.owl#recipe_`, '')}`} key={recipe.recipe.uri} >
+              {/* http://www.edamam.com/ontologies/edamam.owl#recipe_ */}
+              <div className={styles.recipeCard}>
+                <img src={recipe.recipe.image} alt="" />
+                <h3>{recipe.recipe.label}</h3>
+              </div>  
+            </NavLink>
           )}
         </div>
         :
