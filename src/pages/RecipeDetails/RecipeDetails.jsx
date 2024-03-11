@@ -28,6 +28,13 @@ const RecipeDetails = (props) => {
     props.handleAddRecipe({title: recipe.label, edamamId: edamamId})
   }
 
+  const handleAddIngredient = () => {
+    props.handleAddToShoppingList({
+      ingredients: recipe.ingredientLines,
+      edamamId: edamamId
+    })
+  }
+
   return (
     <>
       {recipe.uri ?
@@ -47,11 +54,22 @@ const RecipeDetails = (props) => {
             }
           </div>
           {displayIngredients &&
-            <ul>
-              {recipe.ingredientLines.map(ingredient =>
-                <li key={ingredient}>{ingredient}</li>
-              )}
-            </ul>
+            <>
+              <ul>
+                {recipe.ingredientLines.map(ingredient =>
+                  <li key={ingredient}>{ingredient}</li>
+                )}
+              </ul>
+              {
+                props.profile.recipes.some(rec => rec.edamamId === edamamId) &&
+                <button 
+                  className={styles.ingredientButton}
+                  onClick={handleAddIngredient}
+                >
+                  Add To Shopping List
+                </button>
+              }
+            </>
           }
           
         </div>

@@ -58,6 +58,13 @@ function App() {
     setProfile(updatedProfile)
   }
 
+  const handleAddToShoppingList = async (ingredientData) => {
+    // make API call with ingredients array
+    const updatedProfile = await profileService.addToShoppingList(ingredientData)
+    // update profile state
+    setProfile(updatedProfile)
+  }
+
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
@@ -68,6 +75,7 @@ function App() {
           <RecipeDetails 
             profile={profile} 
             handleAddRecipe={handleAddRecipe}
+            handleAddToShoppingList={handleAddToShoppingList}
           />} 
         />
         <Route path="/recipes/search" element={<RecipeSearch />} />
