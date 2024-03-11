@@ -63,6 +63,7 @@ function App() {
     const updatedProfile = await profileService.addToShoppingList(ingredientData)
     // update profile state
     setProfile(updatedProfile)
+    navigate('/shopping')
   }
 
   return (
